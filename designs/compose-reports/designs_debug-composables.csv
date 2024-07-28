@@ -1,0 +1,7 @@
+package,name,composable,skippable,restartable,readonly,inline,isLambda,hasDefaults,defaultsGroup,groups,calls,
+com.example.designs.organisms.SimpleImageCard,SimpleImageCard,1,0,1,0,0,0,0,0,1,1,
+com.example.designs.organisms.SimpleImageCard,SimpleImageCard,1,0,1,0,0,0,0,0,1,1,
+com.example.designs.organisms.DetailedCard,DetailedCard,1,1,1,0,0,0,0,0,1,0,
+com.example.designs.organisms.SimpleImageCardUpperPlaceholder,SimpleImageCardUpperPlaceholder,1,0,1,0,0,0,0,0,3,4,
+com.example.designs.organisms.PreviewSimpleImageCardUpperPlaceholder,PreviewSimpleImageCardUpperPlaceholder,1,1,1,0,0,0,0,0,1,1,
+com.example.designs.organisms.PreviewSimpleImageCardUpperPlaceholder2,PreviewSimpleImageCardUpperPlaceholder2,1,1,1,0,0,0,0,0,1,1,
