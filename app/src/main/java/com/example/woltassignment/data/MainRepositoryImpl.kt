@@ -25,37 +25,31 @@ private var position = 0
 
 class MainRepositoryImpl(private val woltApi: WoltApi) : MainRepository {
     override fun restaurants(): Flow<List<Restaurant>> = flow {
-        while (true) {
-            try {
-                val coordinate = coordinates[position % INTERVAL_SEC]
-                val restaurants = woltApi.getRestaurants(coordinate.first, coordinate.second)
-                val restaurantsDTO = mutableListOf<Restaurant>()
+        val coordinate = coordinates[position % INTERVAL_SEC]
+        val restaurants = woltApi.getRestaurants(coordinate.first, coordinate.second)
+        val restaurantsDTO = mutableListOf<Restaurant>()
 
-                val section = restaurants.sections[1]
+        val section = restaurants.sections[1]
 
-                for (j in section.items.indices) {
-                    if (restaurantsDTO.size > 14) {
-                        break
-                    }
-                    val item = section.items[j]
-                    restaurantsDTO.add(
-                        Restaurant(
-                            id = item.venue.id,
-                            description = item.venue.short_description,
-                            name = item.venue.name,
-                            url = item.image.url,
-                            liked = false
-                        )
-                    )
-                }
-
-                emit(restaurantsDTO)
-
-                position++
-                delay(INTERVAL_SEC * 1000L)
-            } catch (e: Exception) {
-                Log.e("MainRepositoryImpl", e.toString())
+        for (j in section.items.indices) {
+            if (restaurantsDTO.size > 14) {
+                break
             }
+            val item = section.items[j]
+            restaurantsDTO.add(
+                Restaurant(
+                    id = item.venue.id,
+                    description = item.venue.short_description,
+                    name = item.venue.name,
+                    url = item.image.url,
+                    liked = false
+                )
+            )
         }
+
+        emit(restaurantsDTO)
+
+        position++
+        delay(INTERVAL_SEC * 1000L)
     }
 }

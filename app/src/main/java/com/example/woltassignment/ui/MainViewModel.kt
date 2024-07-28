@@ -1,4 +1,4 @@
-package com.example.woltassignment
+package com.example.woltassignment.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

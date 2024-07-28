@@ -1,4 +1,4 @@
-package com.example.woltassignment
+package com.example.woltassignment.ui
 
 import com.example.woltassignment.domain.model.Restaurant
 import kotlinx.collections.immutable.ImmutableList

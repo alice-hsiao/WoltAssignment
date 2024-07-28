@@ -1,4 +1,4 @@
-package com.example.woltassignment
+package com.example.woltassignment.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.designs.theme.DesignSystemTheme
+import com.example.woltassignment.MyApp
 import com.example.woltassignment.domain.model.Restaurant
 import kotlinx.collections.immutable.ImmutableList
 

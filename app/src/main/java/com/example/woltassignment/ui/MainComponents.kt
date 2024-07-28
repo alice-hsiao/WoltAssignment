@@ -1,4 +1,4 @@
-package com.example.woltassignment
+package com.example.woltassignment.ui
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
