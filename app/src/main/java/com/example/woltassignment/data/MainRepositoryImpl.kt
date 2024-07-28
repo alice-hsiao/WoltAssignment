@@ -1,12 +1,11 @@
 package com.example.woltassignment.data
 
+import android.util.Log
 import com.example.woltassignment.domain.MainRepository
 import com.example.woltassignment.domain.model.Restaurant
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.receiveAsFlow
 
 private val coordinates = listOf(
     60.170187 to 24.930599,
@@ -27,32 +26,36 @@ private var position = 0
 class MainRepositoryImpl(private val woltApi: WoltApi) : MainRepository {
     override fun restaurants(): Flow<List<Restaurant>> = flow {
         while (true) {
-            val coordinate = coordinates[position % INTERVAL_SEC]
-            val restaurants = woltApi.getRestaurants(coordinate.first, coordinate.second)
-            val restaurantsDTO = mutableListOf<Restaurant>()
+            try {
+                val coordinate = coordinates[position % INTERVAL_SEC]
+                val restaurants = woltApi.getRestaurants(coordinate.first, coordinate.second)
+                val restaurantsDTO = mutableListOf<Restaurant>()
 
-            val section = restaurants.sections[1]
+                val section = restaurants.sections[1]
 
-            for (j in section.items.indices) {
-                if (restaurantsDTO.size > 14) {
-                    break
-                }
-                val item = section.items[j]
-                restaurantsDTO.add(
-                    Restaurant(
-                        id = item.venue.id,
-                        description = item.venue.short_description,
-                        name = item.venue.name,
-                        url = item.image.url,
-                        liked = false
+                for (j in section.items.indices) {
+                    if (restaurantsDTO.size > 14) {
+                        break
+                    }
+                    val item = section.items[j]
+                    restaurantsDTO.add(
+                        Restaurant(
+                            id = item.venue.id,
+                            description = item.venue.short_description,
+                            name = item.venue.name,
+                            url = item.image.url,
+                            liked = false
+                        )
                     )
-                )
+                }
+
+                emit(restaurantsDTO)
+
+                position++
+                delay(INTERVAL_SEC * 1000L)
+            } catch (e: Exception) {
+                Log.e("MainRepositoryImpl", e.toString())
             }
-
-            emit(restaurantsDTO)
-
-            position++
-            delay(INTERVAL_SEC * 1000L)
         }
     }
 }

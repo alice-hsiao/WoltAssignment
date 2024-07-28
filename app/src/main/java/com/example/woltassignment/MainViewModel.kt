@@ -1,14 +1,11 @@
 package com.example.woltassignment
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.woltassignment.data.MainRepositoryImpl
-import com.example.woltassignment.data.woltApi
+import com.example.woltassignment.di.AppModule
 import com.example.woltassignment.domain.MainRepository
 import kotlinx.collections.immutable.toImmutableList
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -16,11 +13,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import kotlin.math.log
 
-
-class MainViewModel constructor(private val mainRepository: MainRepository) : ViewModel() {
+class MainViewModel (private val mainRepository: MainRepository) : ViewModel() {
 
     private val _state = MutableStateFlow(MainState())
     val state: StateFlow<MainState> =
@@ -31,7 +25,6 @@ class MainViewModel constructor(private val mainRepository: MainRepository) : Vi
 
                 newRestaurants.copy(liked = liked)
             }
-            Log.i("MainViewModel", "new refresh $newRestaurants")
             MainState(restaurants = newRestaurants.toImmutableList())
         }.stateIn(
             scope = viewModelScope,
@@ -60,9 +53,9 @@ class MainViewModel constructor(private val mainRepository: MainRepository) : Vi
     }
 
     companion object {
-        val Factory = object : ViewModelProvider.Factory {
+        fun Factory(appModule: AppModule) = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return MainViewModel(MainRepositoryImpl(woltApi = woltApi)) as T
+                return MainViewModel(appModule.mainRepository) as T
             }
         }
     }

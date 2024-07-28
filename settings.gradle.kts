@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "WoltAssignment"
 include(":app")
+include(":designs")
