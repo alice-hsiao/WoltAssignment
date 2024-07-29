@@ -1,5 +1,7 @@
 package com.example.woltassignment.di
 
+import com.example.woltassignment.core.DispatcherProvider
+import com.example.woltassignment.core.DispatcherProviderImpl
 import com.example.woltassignment.data.BASE_URL
 import com.example.woltassignment.data.MainRepositoryImpl
 import com.example.woltassignment.data.WoltApi
@@ -15,7 +17,12 @@ class AppModuleImpl : AppModule {
             .build()
             .create(WoltApi::class.java)
     }
+
     override val mainRepository: MainRepository by lazy {
         MainRepositoryImpl(woltApi)
+    }
+
+    override val dispatcherProvider: DispatcherProvider by lazy {
+        DispatcherProviderImpl()
     }
 }

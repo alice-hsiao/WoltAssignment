@@ -11,5 +11,5 @@ interface WoltApi {
     suspend fun getRestaurants(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double
-    ): RestaurantDO
+    ): RestaurantDTO
 }

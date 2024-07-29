@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.woltassignment.core.ApiResponse
+import com.example.woltassignment.core.DispatcherProvider
 import com.example.woltassignment.di.AppModule
 import com.example.woltassignment.domain.MainRepository
 import com.example.woltassignment.domain.model.Restaurant
@@ -19,7 +20,10 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
+class MainViewModel(
+    private val dispatcher: DispatcherProvider,
+    private val mainRepository: MainRepository,
+) : ViewModel() {
     private val _effect = Channel<MainEffect>()
     val effect = _effect.receiveAsFlow()
 
@@ -72,7 +76,7 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
             }
 
             else -> {
-                viewModelScope.launch {
+                viewModelScope.launch(dispatcher.main) {
                     _effect.send(MainEffect.ShowSnackbar(response.toString()))
                 }
                 mainState
@@ -83,7 +87,7 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
     companion object {
         fun Factory(appModule: AppModule) = object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return MainViewModel(appModule.mainRepository) as T
+                return MainViewModel(appModule.dispatcherProvider, appModule.mainRepository) as T
             }
         }
     }

@@ -48,7 +48,7 @@ fun RestaurantCard(
         mainContent = {
             Image(
                 painter = painter,
-                contentDescription = "card image",
+                contentDescription = "restaurant photo",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .height(IMAGE_HEIGHT)
@@ -109,7 +109,8 @@ fun ErrorSnackbar(error: String, modifier: Modifier = Modifier) {
         Text(
             text = error,
             modifier = Modifier.weight(1f),
-            color = LocalMyContentColor.current
+            color = LocalMyContentColor.current,
+            textStyle = DesignSystemTheme.typography.h5.bold
         )
     }
 }

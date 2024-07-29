@@ -1,6 +1,6 @@
 package com.example.woltassignment.data
 
-data class RestaurantDO(
+data class RestaurantDTO(
     val sections: List<Section>
 )
 

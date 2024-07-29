@@ -31,17 +31,17 @@ class MainRepositoryImpl(private val woltApi: WoltApi) : MainRepository {
         while (true) {
             try {
                 val coordinate = coordinates[position % INTERVAL_SEC]
-                val restaurants = woltApi.getRestaurants(coordinate.first, coordinate.second)
-                val restaurantsDTO = mutableListOf<Restaurant>()
+                val restaurantsDTO = woltApi.getRestaurants(coordinate.first, coordinate.second)
+                val restaurants = mutableListOf<Restaurant>()
 
-                val section = restaurants.sections[1]
+                val section = restaurantsDTO.sections[1]
 
                 for (j in section.items.indices) {
-                    if (restaurantsDTO.size >= MAX_RESTAURANT) {
+                    if (restaurants.size >= MAX_RESTAURANT) {
                         break
                     }
                     val item = section.items[j]
-                    restaurantsDTO.add(
+                    restaurants.add(
                         Restaurant(
                             id = item.venue.id,
                             description = item.venue.short_description,
@@ -52,7 +52,7 @@ class MainRepositoryImpl(private val woltApi: WoltApi) : MainRepository {
                     )
                 }
                 position++
-                emit(ApiResponse.Success(restaurantsDTO))
+                emit(ApiResponse.Success(restaurants))
 
             } catch (e: Exception) {
                 emit(
