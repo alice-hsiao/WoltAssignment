@@ -1,11 +1,14 @@
 package com.example.woltassignment.data
 
-import android.util.Log
+import com.example.woltassignment.core.ApiResponse
 import com.example.woltassignment.domain.MainRepository
 import com.example.woltassignment.domain.model.Restaurant
+import com.google.gson.JsonSyntaxException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
+import java.net.UnknownHostException
 
 private val coordinates = listOf(
     60.170187 to 24.930599,
@@ -24,32 +27,44 @@ private var position = 0
 
 
 class MainRepositoryImpl(private val woltApi: WoltApi) : MainRepository {
-    override fun restaurants(): Flow<List<Restaurant>> = flow {
-        val coordinate = coordinates[position % INTERVAL_SEC]
-        val restaurants = woltApi.getRestaurants(coordinate.first, coordinate.second)
-        val restaurantsDTO = mutableListOf<Restaurant>()
+    override fun restaurants(): Flow<ApiResponse<List<Restaurant>, Throwable>> = flow {
+        while (true) {
+            try {
+                val coordinate = coordinates[position % INTERVAL_SEC]
+                val restaurants = woltApi.getRestaurants(coordinate.first, coordinate.second)
+                val restaurantsDTO = mutableListOf<Restaurant>()
 
-        val section = restaurants.sections[1]
+                val section = restaurants.sections[1]
 
-        for (j in section.items.indices) {
-            if (restaurantsDTO.size > 14) {
-                break
-            }
-            val item = section.items[j]
-            restaurantsDTO.add(
-                Restaurant(
-                    id = item.venue.id,
-                    description = item.venue.short_description,
-                    name = item.venue.name,
-                    url = item.image.url,
-                    liked = false
+                for (j in section.items.indices) {
+                    if (restaurantsDTO.size > 14) {
+                        break
+                    }
+                    val item = section.items[j]
+                    restaurantsDTO.add(
+                        Restaurant(
+                            id = item.venue.id,
+                            description = item.venue.short_description,
+                            name = item.venue.name,
+                            url = item.image.url,
+                            liked = false
+                        )
+                    )
+                }
+                position++
+                emit(ApiResponse.Success(restaurantsDTO))
+
+            } catch (e: Exception) {
+                emit(
+                    when (e) {
+                        is UnknownHostException -> ApiResponse.Fail.NetworkError
+                        is JsonSyntaxException -> ApiResponse.Fail.SerializationError
+                        is HttpException -> ApiResponse.Fail.HttpError(e.code(), e)
+                        else -> ApiResponse.Fail.Unknown
+                    }
                 )
-            )
+            }
+            delay(INTERVAL_SEC * 1000L)
         }
-
-        emit(restaurantsDTO)
-
-        position++
-        delay(INTERVAL_SEC * 1000L)
     }
 }
