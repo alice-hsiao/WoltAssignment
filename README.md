@@ -8,19 +8,23 @@
 - [Tech Stack](#tech-stack)
 
 ## Introduction
-Restaurant Fetching:
+**Restaurant Fetching:**
+
 When the app is opened, it retrieves restaurant data from the Wolt server every 10 seconds.
 Fetching is paused when the app is in the background and resumes when the app returns to the foreground.
 
-Like Feature:
+**Like Feature:**
+
 Each restaurant card features a heart icon in the top right corner that animates slightly when clicked.
 The state of liked restaurants is preserved even after new data is fetched from the Wolt server.
 
-Design and Testing:
+**Design and Testing:**
+
 A custom design system is implemented across the app.
 The app is covered with unit tests to ensure reliability and functionality.
 
-Error Handling:
+**Error Handling:**
+
 When the API throws an exception, the app displays the error message in a snackbar.
 
 ## Features
