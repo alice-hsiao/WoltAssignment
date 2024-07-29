@@ -1,0 +1,128 @@
+restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable], [androidx.compose.ui.UiComposable], [androidx.compose.ui.UiComposable]]") fun Button(
+  stable onClick: Function0<Unit>
+  stable modifier: Modifier? = @static Companion
+  stable enabled: Boolean = @static true
+  stable shape: Shape? = @dynamic DesignSystemTheme.<get-shapes>($composer, 0b0110).large
+  stable color: Color = @dynamic DesignSystemTheme.<get-colorsScheme>($composer, 0b0110).primary4
+  stable leadingIcon: Function2<Composer, Int, Unit>? = @static null
+  stable trailingIcon: Function2<Composer, Int, Unit>? = @static null
+  stable content: @[ExtensionFunctionType] Function3<RowScope, Composer, Int, Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable]]") fun IconButton(
+  stable onClick: Function0<Unit>
+  stable modifier: Modifier? = @static Companion
+  stable enabled: Boolean = @static true
+  stable shape: Shape? = @dynamic DesignSystemTheme.<get-shapes>($composer, 0b0110).large
+  stable size: DpSize = @static DpSize(24.dp, 24.dp)
+  stable content: Function2<Composer, Int, Unit>
+)
+fun rememberInputTypeState(
+  stable type: InputType? = @static InputType.Default
+): InputTypeState
+restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable], [androidx.compose.ui.UiComposable]]") fun Input(
+  stable text: String
+  stable modifier: Modifier? = @static Companion
+  stable enabled: Boolean = @static true
+  stable inputTypeState: InputTypeState? = @dynamic rememberInputTypeState(null, $composer, 0, 0b0001)
+  stable shape: Shape? = @dynamic DesignSystemTheme.<get-shapes>($composer, 0b0110).small
+  stable onTextChange: Function1<String, Unit>? = @static { it: String ->
+
+}
+
+  stable onFocusChange: Function1<Boolean, Unit>? = @static { it: Boolean ->
+
+}
+
+  stable leadingIcon: Function2<Composer, Int, Unit>? = @static null
+  stable trailingIcon: Function2<Composer, Int, Unit>? = @static null
+)
+restartable skippable scheme("[0, [0]]") fun ProvideInputSpecs(
+  stable enabled: Boolean
+  stable inputTypeState: InputType
+  stable isFocused: Boolean
+  stable specs: Function6<Color, Color, Color, Color, Composer, Int, Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable]]") fun Card(
+  stable modifier: Modifier? = @static Companion
+  stable onClick: Function0<Unit>? = @static {
+
+}
+
+  stable content: @[ExtensionFunctionType] Function3<BoxScope, Composer, Int, Unit>
+)
+restartable scheme("[androidx.compose.ui.UiComposable]") fun Icon(
+  unstable painter: Painter
+  stable modifier: Modifier? = @static Companion
+  stable tint: Color = @dynamic LocalMyContentColor.<get-current>($composer, 0b0110)
+  stable size: Dp = @static 24.dp
+)
+fun <get-favorite>(
+  unused stable <this>: MyIcons
+): Painter
+fun <get-favorite_border>(
+  unused stable <this>: MyIcons
+): Painter
+fun <get-error>(
+  unused stable <this>: MyIcons
+): Painter
+restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable]]") fun Surface(
+  stable modifier: Modifier? = @static Companion
+  stable color: Color = @dynamic DesignSystemTheme.<get-colorsScheme>($composer, 0b0110).shadesWhite
+  stable contentColor: Color = @dynamic color.contentColor()
+  stable shape: Shape? = @static RectangleShape
+  stable borderStroke: BorderStroke? = @static null
+  stable elevation: Dp = @static 0.dp
+  stable onClick: Function0<Unit>? = @static null
+  stable content: @[ExtensionFunctionType] Function3<BoxScope, Composer, Int, Unit>
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable]") fun Text(
+  stable text: String
+  stable modifier: Modifier? = @static Companion
+  stable color: Color = @static Companion.Unspecified
+  stable textStyle: TextStyle? = @dynamic DesignSystemTheme.<get-typography>($composer, 0b0110).h4.bold
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable], [androidx.compose.ui.UiComposable]]") fun InputGroup(
+  stable text: String
+  stable modifier: Modifier? = @static Companion
+  stable enabled: Boolean = @static true
+  stable inputType: InputTypeState? = @dynamic rememberInputTypeState(null, $composer, 0, 0b0001)
+  stable shape: Shape? = @dynamic DesignSystemTheme.<get-shapes>($composer, 0b0110).small
+  stable title: String? = @static ""
+  stable hint: String? = @static ""
+  stable onTextChange: Function1<String, Unit>? = @static { it: String ->
+
+}
+
+  stable onFocusChange: Function1<Boolean, Unit>? = @static { it: Boolean ->
+
+}
+
+  stable leadingIcon: Function2<Composer, Int, Unit>? = @static null
+  stable trailingIcon: Function2<Composer, Int, Unit>? = @static null
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable], [androidx.compose.ui.UiComposable]]") fun Snackbar(
+  stable modifier: Modifier? = @static Companion
+  stable color: Color = @dynamic DesignSystemTheme.<get-colorsScheme>($composer, 0b0110).shadesWhite
+  stable trailingIcon: Function2<Composer, Int, Unit>? = @static ComposableSingletons$SnackbarKt.lambda-1
+  stable content: @[ExtensionFunctionType] Function3<RowScope, Composer, Int, Unit>? = @static ComposableSingletons$SnackbarKt.lambda-2
+)
+restartable skippable scheme("[androidx.compose.ui.UiComposable, [androidx.compose.ui.UiComposable], [androidx.compose.ui.UiComposable], [androidx.compose.ui.UiComposable]]") fun DetailedCard(
+  stable modifier: Modifier? = @static Companion
+  stable mainContentHeight: Dp = @static 150.dp
+  stable mainContent: Function2<Composer, Int, Unit>
+  stable subContent: @[ExtensionFunctionType] Function3<ColumnScope, Composer, Int, Unit>
+  stable onMainContent: @[ExtensionFunctionType] Function3<BoxScope, Composer, Int, Unit>? = @static ComposableSingletons$CardsKt.lambda-1
+)
+restartable skippable scheme("[0, [0]]") fun DesignSystemTheme(
+  stable darkTheme: Boolean = @dynamic isSystemInDarkTheme($composer, 0)
+  stable content: Function2<Composer, Int, Unit>
+)
+readonly fun <get-colorsScheme>(
+  unused stable <this>: DesignSystemTheme
+): MyColors
+readonly fun <get-typography>(
+  unused stable <this>: DesignSystemTheme
+): MyTypography
+readonly fun <get-shapes>(
+  unused stable <this>: DesignSystemTheme
+): MyShapes

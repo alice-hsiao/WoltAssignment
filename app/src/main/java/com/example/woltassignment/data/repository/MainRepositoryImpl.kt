@@ -1,6 +1,7 @@
-package com.example.woltassignment.data
+package com.example.woltassignment.data.repository
 
 import com.example.woltassignment.core.ApiResponse
+import com.example.woltassignment.data.WoltApi
 import com.example.woltassignment.domain.MainRepository
 import com.example.woltassignment.domain.model.Restaurant
 import com.google.gson.JsonSyntaxException

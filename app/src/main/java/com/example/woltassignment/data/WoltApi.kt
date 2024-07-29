@@ -1,5 +1,6 @@
 package com.example.woltassignment.data
 
+import com.example.woltassignment.data.dto.RestaurantDTO
 import retrofit2.http.GET
 import retrofit2.http.Query
 

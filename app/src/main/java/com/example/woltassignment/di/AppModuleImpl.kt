@@ -3,8 +3,8 @@ package com.example.woltassignment.di
 import com.example.woltassignment.core.DispatcherProvider
 import com.example.woltassignment.core.DispatcherProviderImpl
 import com.example.woltassignment.data.BASE_URL
-import com.example.woltassignment.data.MainRepositoryImpl
 import com.example.woltassignment.data.WoltApi
+import com.example.woltassignment.data.repository.MainRepositoryImpl
 import com.example.woltassignment.domain.MainRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
