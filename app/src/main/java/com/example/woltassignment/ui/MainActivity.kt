@@ -25,7 +25,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.designs.molecules.Snackbar
 import com.example.designs.theme.DesignSystemTheme
 import com.example.woltassignment.MyApp
 import com.example.woltassignment.domain.model.Restaurant
@@ -48,7 +47,7 @@ class MainActivity : ComponentActivity() {
                     snackbarHost = {
                         SnackbarHost(
                             hostState = snackbarHostState,
-                            snackbar = { Snackbar() }
+                            snackbar = { ErrorSnackbar(it.visuals.message) }
                         )
                     },
                     modifier = Modifier

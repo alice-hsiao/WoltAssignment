@@ -1,6 +1,8 @@
 package com.example.designs.atoms.basic
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -24,6 +26,7 @@ fun Surface(
     color: Color = DesignSystemTheme.colorsScheme.shadesWhite,
     contentColor: Color = color.contentColor(),
     shape: Shape = RectangleShape,
+    borderStroke: BorderStroke? = null,
     elevation: Dp = 0.dp,
     onClick: (() -> Unit)? = null,
     content: @Composable BoxScope.() -> Unit,
@@ -40,6 +43,9 @@ fun Surface(
                 .clip(shape)
                 .background(color = color, shape = shape)
                 .clickable(enabled = onClick != null, onClick = onClick ?: {})
+                .then(
+                    borderStroke?.let { Modifier.border(it, shape = shape) } ?: Modifier
+                )
         ) {
             content()
         }

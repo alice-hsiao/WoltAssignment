@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -17,8 +18,10 @@ import com.example.designs.atoms.IconButton
 import com.example.designs.atoms.basic.Icon
 import com.example.designs.atoms.basic.MyIcons
 import com.example.designs.atoms.basic.Text
+import com.example.designs.molecules.Snackbar
 import com.example.designs.organisms.DetailedCard
 import com.example.designs.theme.DesignSystemTheme
+import com.example.designs.theme.LocalMyContentColor
 
 private val BIG_HEART_SIZE = 38.dp
 private val SMALL_HEART_SIZE = 36.dp
@@ -47,7 +50,9 @@ fun RestaurantCard(
                 painter = painter,
                 contentDescription = "card image",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(IMAGE_HEIGHT).fillMaxWidth()
+                modifier = Modifier
+                    .height(IMAGE_HEIGHT)
+                    .fillMaxWidth()
             )
         },
         subContent = {
@@ -89,4 +94,22 @@ fun RestaurantCard(
             }
         }
     )
+}
+
+@Composable
+fun ErrorSnackbar(error: String, modifier: Modifier = Modifier) {
+    Snackbar(
+        modifier = modifier,
+        color = DesignSystemTheme.colorsScheme.error4.copy(0.6f)
+            .compositeOver(DesignSystemTheme.colorsScheme.shadesWhite),
+        trailingIcon = {
+            Icon(painter = MyIcons.error, tint = DesignSystemTheme.colorsScheme.error4)
+        }
+    ) {
+        Text(
+            text = error,
+            modifier = Modifier.weight(1f),
+            color = LocalMyContentColor.current
+        )
+    }
 }

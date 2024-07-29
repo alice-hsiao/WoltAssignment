@@ -45,4 +45,8 @@ object MyIcons {
     val favorite_border: Painter
         @Composable
         get() = painterResource(id = R.drawable.favorite_border)
+    val error: Painter
+        @Composable
+        get() = painterResource(id = R.drawable.error)
+
 }

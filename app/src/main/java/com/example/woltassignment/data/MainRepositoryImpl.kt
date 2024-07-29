@@ -23,8 +23,8 @@ private val coordinates = listOf(
     60.170085 to 24.929569
 )
 private const val INTERVAL_SEC = 10
+private const val MAX_RESTAURANT = 15
 private var position = 0
-
 
 class MainRepositoryImpl(private val woltApi: WoltApi) : MainRepository {
     override fun restaurants(): Flow<ApiResponse<List<Restaurant>, Throwable>> = flow {
@@ -37,7 +37,7 @@ class MainRepositoryImpl(private val woltApi: WoltApi) : MainRepository {
                 val section = restaurants.sections[1]
 
                 for (j in section.items.indices) {
-                    if (restaurantsDTO.size > 14) {
+                    if (restaurantsDTO.size >= MAX_RESTAURANT) {
                         break
                     }
                     val item = section.items[j]
